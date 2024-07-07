@@ -1,0 +1,5 @@
+user : cpses_aifwl5gy0o@localhos
+port : 3306
+host  : sh1.hg-servers.com
+user: aixbtylr
+pass : Kalkai@2019
