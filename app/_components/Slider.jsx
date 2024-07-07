@@ -17,7 +17,7 @@ function Slider({sliderList = []}) {
         <CarouselContent>
             {sliderList.map((sliders, index) => (
                 <CarouselItem>
-                <Image src={`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}${sliders.attributes.image.data[0].attributes.url}`} alt='slider101' width={1000} height={500} className='w-full h-[200px] md:h-[400px] object-cover rounded-2xl' />
+                <img src={`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}${sliders.attributes.image.data[0].attributes.url}`} alt='slider101' width={1000} height={500} className='w-full h-[200px] md:h-[400px] object-cover rounded-2xl' />
             </CarouselItem>
             ))}
             

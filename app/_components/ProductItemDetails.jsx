@@ -57,7 +57,7 @@ function ProductItemDetails({product}) {
 
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 p-7 bg-white text-black'>
-      <Image src={`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}${product.attributes.image.data[0].attributes.url}`} width={300} height={300} alt='img'
+      <img src={`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}${product.attributes.image.data[0].attributes.url}`} width={300} height={300} alt='img'
       className='bg-slate-200 p-5 h-[320px] w-[300px] object-contain rounded-lg'
       />
 

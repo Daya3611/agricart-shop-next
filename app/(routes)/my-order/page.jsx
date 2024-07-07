@@ -11,29 +11,31 @@ import moment from 'moment';
 import MyOrderItem from './_components/MyOrderItem';
 
 function Page() {
-  const jwt = sessionStorage.getItem('jwt');
-  const user = JSON.parse(sessionStorage.getItem('user'));
+  const [jwt, setJwt] = useState("");
+  const [user, setUser] = useState("");
   const router = useRouter();
   const [orderList, setOrderList] = useState([]);
   const [openIndex, setOpenIndex] = useState(null);
 
+  
+  const getMyOrders = async () => {
+    const orderList_ = await GlobalApi.getMyOrders(user.id, jwt);
+    console.log(orderList_);
+    setOrderList(orderList_);
+  };
+  
+  const handleToggle = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
   useEffect(() => {
     if (!jwt) {
       router.replace('/');
     } else {
       getMyOrders();
     }
+    setJwt(sessionStorage.getItem('jwt'));
+    setUser(JSON.parse(sessionStorage.getItem('user')));
   }, []);
-
-  const getMyOrders = async () => {
-    const orderList_ = await GlobalApi.getMyOrders(user.id, jwt);
-    console.log(orderList_);
-    setOrderList(orderList_);
-  };
-
-  const handleToggle = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
 
   return (
     <div>
@@ -45,15 +47,15 @@ function Page() {
             <Collapsible key={index}>
               <CollapsibleTrigger onClick={() => handleToggle(index)}>
                 <div className='border p-2 bg-slate-100 flex justify-evenly gap-24'>
-                  <h2><span className='font-bold mr-2'>Order Date: </span> {moment(item?.createdAt).format('DD-MMM-YYYY, h:mm a') }</h2>
+                  <h2><span className='font-bold mr-2'>Order Date: </span> {moment(item?.createdAt).format('DD-MMM-YYYY, h:mm a')}</h2>
                   <h2><span className='font-bold mr-2'>Total Amount: ₹</span> {item?.totalOrderAmount}</h2>
                   <h2><span className='font-bold mr-2'>Status: </span> {item?.Status}</h2>
                 </div>
               </CollapsibleTrigger>
               <CollapsibleContent isOpen={openIndex === index}>
-                <p>Order Details: {item?.OrderItm.map((order,index_)=>(
-                    <MyOrderItem orderItm={order} key={index_}/>
-                    
+                <p>Order Details: {item?.OrderItm.map((order, index_) => (
+                  <MyOrderItem orderItm={order} key={index_} />
+
                 ))}</p>
               </CollapsibleContent>
             </Collapsible>

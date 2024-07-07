@@ -9,7 +9,7 @@ function CategoryList({categoryList}) {
       <div className='grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-5 mt-2'>
         {categoryList.map((category, index) => (
             <Link href={'/products-category/'+category.attributes.Name} className='flex flex-col items-center bg-green-50 gap-2 p-4 rounded-lg group cursor-pointer hover:bg-green-200'>
-                <Image src={`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}${category.attributes.Icon.data[0].attributes.url}`}
+                <img src={`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}${category.attributes.Icon.data[0].attributes.url}`}
                 width={70}
                 height={70}
                 alt='icon'
