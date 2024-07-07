@@ -8,7 +8,7 @@ function ProductList({productList}) {
     
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-6'>
             {productList.map((product, index) => index<8 && (
-                <ProductItem product={product} />
+                <ProductItem product={product} key={product}/>
             ))}
             
         </div>

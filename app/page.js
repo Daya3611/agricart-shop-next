@@ -21,7 +21,7 @@ export default async function Home() {
     <Slider sliderList={sliderList}/>
     <CategoryList categoryList={categoryList}/>
     <ProductList productList={productList}/>
-    <Image src="/ban1.jpg" width={1000} height={300} alt="banner"
+    <img src="/ban1.jpg" width={1000} height={300} alt="banner"
     className="w-full h-[400px] object-contain mt-10"
     />
     <Footer/>
