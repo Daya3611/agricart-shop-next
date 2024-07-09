@@ -28,13 +28,13 @@ function Page() {
     setOpenIndex(openIndex === index ? null : index);
   };
   useEffect(() => {
-    if (!jwt) {
+    setJwt(sessionStorage.getItem('jwt'));
+    setUser(JSON.parse(sessionStorage.getItem('user')));
+    if (!sessionStorage.getItem('jwt')) {
       router.replace('/');
     } else {
       getMyOrders();
     }
-    setJwt(sessionStorage.getItem('jwt'));
-    setUser(JSON.parse(sessionStorage.getItem('user')));
   }, []);
 
   return (
