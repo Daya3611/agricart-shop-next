@@ -14,7 +14,7 @@ function page() {
 
     const [jwt, setJwt] = useState("");
     const [user, setUser] = useState("");
-    const [users_permissions_user, setUsers_permissions_user] = useState("");;
+    const [users_permissions_user, setUsers_permissions_user] = useState("");
     const [totalCartItems, setTotalCartItems] = useState(0);
     const [cartItemList, setCartItemList] = useState([]);
     const [subtotal, setSubTotal] = useState(0);
@@ -36,7 +36,7 @@ function page() {
     const router = useRouter();
 
     const getCartItems = async () => {
-        const cartItemList_ = await GlobalApi.getCartItems(user.id, jwt);
+        const cartItemList_ = await GlobalApi.getCartItems(JSON.parse(sessionStorage.getItem('user')).id, sessionStorage.getItem('jwt'));
         console.log(cartItemList_);
         // alert(cartItemList_);
         setTotalCartItems(cartItemList_.length);
@@ -109,22 +109,21 @@ function page() {
         toast('Order Palced Succsefully . Please Make Payment  For Order Confermation Or Else Your Order Is Conver in COD mode & Our Support Team Will Contact You Shortly')
 
     }
-
     useEffect(() => {
-        if (!jwt) {
-            router.push('/sign-in');
-        }
-        getCartItems();
         setJwt(sessionStorage.getItem('jwt'));
         setUser(JSON.parse(sessionStorage.getItem('user')));
         setUsers_permissions_user(JSON.parse(sessionStorage.getItem('users_permissions_user')));
+        if (!sessionStorage.getItem('jwt')) {
+            router.push('/sign-in');
+        }
+        getCartItems();
         let total = 0;
         cartItemList.forEach(element => {
             total += element.amount;
         });
         setTotalAmount(total * 1 + 100 + subtotal * (9 / 100).toFixed(2))
         setSubTotal(total)
-    }, [cartItemList])
+    }, []);
 
     return (
         <div>

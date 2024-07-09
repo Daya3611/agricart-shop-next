@@ -76,8 +76,8 @@ function Header() {
         setJwt(sessionStorage.getItem('jwt'));
         setIsLogin(sessionStorage.getItem('jwt') ? true : false);
         setUser(JSON.parse(sessionStorage.getItem('user')));
-        getCategoryList();
         getCartItems();
+        getCategoryList();
         let total = 0;
         cartItemList.forEach(element => {
             total += element.amount;
